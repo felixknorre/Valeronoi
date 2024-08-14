@@ -2,6 +2,8 @@
 
 Valeronoi (Valetudo + Voronoi) is a companion for [Valetudo](https://valetudo.cloud) for generating WiFi signal strength maps. It visualizes them using a [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram).
 
+This fork extends the original project with the optional function of using a different system for signal strength measurement. This can be used together with [felixknorre/node-wifiscanner](https://github.com/felixknorre/node-wifiscanner).
+
 ![Screenshot](assets/screenshot.png)
 
 ## Installation

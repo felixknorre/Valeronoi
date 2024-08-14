@@ -67,6 +67,8 @@ void RobotConfigDialog::slot_save() {
   settings.setValue("robot/auth/enabled", ui->groupBoxAuth->isChecked());
   settings.setValue("robot/auth/username", ui->authUsername->text());
   settings.setValue("robot/auth/password", ui->authPassword->text());
+  settings.setValue("robot/externalradio/enable",ui->groupBoxExRadio->isChecked());
+  settings.setValue("robot/externalradio/url", ui->radioAddress->text());
 
   emit signal_config_changed();
 }
@@ -81,6 +83,10 @@ void RobotConfigDialog::load_settings() {
       settings.value("robot/auth/username", "").toString());
   ui->authPassword->setText(
       settings.value("robot/auth/password", "").toString());
+  ui->groupBoxExRadio->setChecked(
+      settings.value("robot/externalradio/enable", false).toBool());
+  ui->radioAddress->setText(
+      settings.value("robot/externalradio/url", "http://").toString());
 
   ensure_http();
 }
@@ -139,6 +145,8 @@ void RobotConfigDialog::slot_robot_connected() {
         tr("❌ The robot does not have the WifiConfigurationCapability.");
   }
 
+
+
   m_robot.slot_disconnect();
 
   QString test_result =
@@ -162,8 +170,12 @@ void RobotConfigDialog::slot_robot_connection_failed() {
 
 void RobotConfigDialog::ensure_http() {
   const auto current_text = ui->valetudoAddress->text().trimmed();
+  const auto current_radio = ui->radioAddress->text().trimmed();
   if (!current_text.startsWith("http://")) {
     ui->valetudoAddress->setText(QString("http://").append(current_text));
+  }
+  if (!current_radio.startsWith("http://")) {
+      ui->radioAddress->setText(QString("http://").append(current_radio));
   }
 }
 }  // namespace Valeronoi::gui::dialog

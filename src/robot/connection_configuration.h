@@ -28,6 +28,8 @@ struct ConnectionConfiguration {
   QUrl m_url;
   bool m_auth;
   QString m_username, m_password;
+  bool m_external_radio;
+  QUrl m_external_url;
 
   void read_settings();
 

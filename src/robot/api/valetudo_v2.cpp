@@ -154,6 +154,11 @@ QNetworkReply *ValetudoAPI::request(const QString &verb, const QUrl &url,
   }
   auto request =
       QNetworkRequest(m_connection_configuration.m_url.resolved(url));
+  if (url == Valeronoi::robot::api::v2::ROBOT_WIFI_CAPABILITY && m_connection_configuration.m_external_radio == true){
+      qDebug().nospace() << "Get WiFi Data from external radio!\n";
+      request =
+          QNetworkRequest(m_connection_configuration.m_external_url.resolved(url));
+  }
   m_connection_configuration.prepare_request(request);
   if (data != nullptr) {
     request.setRawHeader("Content-Type", "application/json");

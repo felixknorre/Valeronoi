@@ -29,6 +29,8 @@ void ConnectionConfiguration::read_settings() {
   m_auth = settings.value("robot/auth/enabled", false).toBool();
   m_username = settings.value("robot/auth/username", "").toString();
   m_password = settings.value("robot/auth/password", "").toString();
+  m_external_radio = settings.value("robot/externalradio/enable", false).toBool();
+  m_external_url = settings.value("robot/externalradio/url", "").toUrl();
 }
 
 ConnectionConfiguration &ConnectionConfiguration::operator=(
